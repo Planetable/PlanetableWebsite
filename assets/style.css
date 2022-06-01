@@ -5,6 +5,21 @@
 html, body {
     padding: 0px;
     margin: 0px;
+    font-family: system-ui;
+    font-size: 14px;
+}
+
+code {
+    font-size: 0.9em;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: #336bad;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 .wrapper {
@@ -78,6 +93,47 @@ html, body {
 
 .markdown-content p:first-child {
     margin-top: 0;
+}
+
+.section {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.action-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.download-button:link, .download-button:visited, .download-button:active {
+    cursor: pointer;
+    border-radius: 60px;
+    padding: 20px 40px 20px 80px;
+    text-decoration: none;
+    line-height: 1;
+    font-size: 1.2em;
+    background-color: #ffc110;
+    color: #222;
+    background-image: url("./download.png");
+    background-repeat: no-repeat;
+    background-size: 40px 40px;
+    background-position: 20px 10px;
+}
+
+.latest-version, .release-date {
+    display: inline-block;
+    font-size: 0.8em;
+    color: #888;
+    text-align: center;
+}
+
+.screenshot {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 600px) {

@@ -3,7 +3,43 @@
 <head>
   <meta charset="utf-8">
   <title>Planet</title>
+  <link rel="preconnect" href="https://opensource.planetable.xyz/" crossorigin>
+  <link rel="dns-prefetch" href="https://opensource.planetable.xyz/">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
   <link rel="stylesheet" href="assets/style.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js" integrity="sha512-HX+/SvM7094YZEKOCtG9EyjRYvK8dKlFhdYAnVCGNxMkA59BZNSZTZrqdDlLXp0O6/NjDb1uKnmutUeuzHb3iQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+  const appcastURL = "https://opensource.planetable.xyz/planet/appcast.xml";
+  const fallbackDownloadURL = "https://opensource.planetable.xyz/planet/release-0.6.1/Planet.zip";
+  window.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelector('.download-button').href = fallbackDownloadURL;
+    axios.get(appcastURL)
+    .then(response => {
+      const x2js = new X2JS();
+      const appcast = x2js.xml_str2json(response.data);
+
+      const download = {
+        latestVersion: appcast.rss.channel.item.title,
+        latestBuildNumber: appcast.rss.channel.item.enclosure['_sparkle:version'],
+        releaseDate: new Date(appcast.rss.channel.item.pubDate),
+        url: appcast.rss.channel.item.enclosure._url,
+      };
+
+      document.querySelector('.latest-version').textContent = `The latest version: ${download.latestVersion} (${download.latestBuildNumber})`;
+      // use `MMM dd, YYYY` date format, remove day of week
+      const dateSegments = download.releaseDate.toDateString().split(' ');
+      const releaseDateString = `${dateSegments[1]} ${dateSegments[2]}, ${dateSegments[3]}`;
+      document.querySelector('.release-date').textContent = `Released on ${releaseDateString}`;
+      document.querySelector('.download-button').href = download.url;
+
+      console.log("Planet latest version is " + download.latestVersion + " (" + download.latestBuildNumber + ") released on " + download.releaseDate);
+      console.log("Download URL is " + download.url);
+    })
+    .catch(error => console.log(error));
+  });
+  </script>
 </head>
 <body>
 <div class="wrapper">
@@ -17,7 +53,30 @@
     <div id="main">
       <div class="main-inner">
         <div class="markdown-content">
-          <p>Planet is a free and open source software for publishing and following web content, and it does not require a centralized server or service. It uses IPFS to achieve peer-to-peer content distribution. Furthermore, you can link your content to an Ethereum Name (.eth) so that others can follow you via Planet by the .eth name. Since both IPFS and ENS are decentralized, you can build your websites or follow others, all in a decentralized manner.</p>
+          <p>Planet is a free and open source software for publishing and following web content, and it does not require a centralized server or service. It uses IPFS to achieve peer-to-peer content distribution. Furthermore, you can link your content to an Ethereum Name (.eth) so that others can follow you via Planet by the .eth name. Since both <a href="https://ipfs.io/" target="_blank">IPFS</a> and <a href="https://ens.domains/" target="_blank">ENS</a> are decentralized, you can build your websites or follow others, all in a decentralized manner.</p>
+          <div class="section">
+            <div class="action-wrapper">
+              <a class="download-button" href="https://opensource.planetable.xyz/planet/release-0.6.1/Planet.zip">Download for Mac</a>
+              <span class="latest-version">The latest version</span>
+              <span class="release-date">Released on</span>
+            </div>
+          </div>
+          <h2>Get Started</h2>
+          <p>Have you ever wondered whether setting up a website with an ENS is possible? The answer is yes, and you can set your website to the Content Hash field like setting an A or CNAME for a traditional domain name.</p>
+
+          <p>The standard is EIP-1577, and this Content Hash field can accept a few possible values. For example, IPFS -- another centralized content distribution technology. And vitalik.eth website is already running on IPFS.</p>
+
+          <p>After you created a website with Planet, right-click on the item in the sidebar, and choose "Copy IPNS," then you will get something that looks like this in pasteboard:</p>
+
+          <p><code>k51qzi5uqu5dgv8kzl1anc0m74n6t9ffdjnypdh846ct5wgpljc7rulynxa74a</code></p>
+
+          <p>Then you can put that IPNS into your ENS ContentHash like this:</p>
+
+          <img src="./assets/set-content-hash.png" al  t="Set Content Hash" class="screenshot" />
+
+          <p>Make sure <code>ipns://</code> is added before that string.</p>
+
+          <p>Then your website is linked to your ENS. Congrats! Now you have a decentralized website running on ENS + IPFS!</p>
         </div>
       </div>
     </div>
