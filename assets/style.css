@@ -136,6 +136,10 @@ a:hover {
     margin-bottom: 20px;
 }
 
+code {
+    line-break: anywhere;
+}
+
 @media (max-width: 600px) {
     #app {
         flex-direction: column;
