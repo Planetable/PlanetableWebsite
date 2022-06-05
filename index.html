@@ -15,8 +15,8 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js" integrity="sha512-HX+/SvM7094YZEKOCtG9EyjRYvK8dKlFhdYAnVCGNxMkA59BZNSZTZrqdDlLXp0O6/NjDb1uKnmutUeuzHb3iQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
-  const appcastURL = "https://opensource.planetable.xyz/planet/appcast.xml";
-  const fallbackDownloadURL = "https://opensource.planetable.xyz/planet/release-0.6.1/Planet.zip";
+  const appcastURL = "https://opensource.planetable.xyz/planet/appcast.xml?r=" + Math.random();
+  const fallbackDownloadURL = "https://opensource.planetable.xyz/planet/release-0.6.13/Planet.zip";
   window.addEventListener('DOMContentLoaded', (event) => {
     document.querySelector('.download-button').href = fallbackDownloadURL;
     axios.get(appcastURL)
