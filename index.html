@@ -16,7 +16,7 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js" integrity="sha512-HX+/SvM7094YZEKOCtG9EyjRYvK8dKlFhdYAnVCGNxMkA59BZNSZTZrqdDlLXp0O6/NjDb1uKnmutUeuzHb3iQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
   const appcastURL = "https://opensource.planetable.xyz/planet/appcast.xml?r=" + Math.random();
-  const fallbackDownloadURL = "https://opensource.planetable.xyz/planet/release-0.6.13/Planet.zip";
+  const fallbackDownloadURL = "https://opensource.planetable.xyz/planet/release-0.6.15-3/Planet.zip";
   window.addEventListener('DOMContentLoaded', (event) => {
     document.querySelector('.download-button').href = fallbackDownloadURL;
     axios.get(appcastURL)
@@ -60,7 +60,7 @@
           <p>Planet is a free and open source software for publishing and following web content, and it does not require a centralized server or service. It uses IPFS to achieve peer-to-peer content distribution. Furthermore, you can link your content to an Ethereum Name (.eth) so that others can follow you via Planet by the .eth name. Since both <a href="https://ipfs.io/" target="_blank">IPFS</a> and <a href="https://ens.domains/" target="_blank">ENS</a> are decentralized, you can build your websites or follow others, all in a decentralized manner.</p>
           <div class="section">
             <div class="action-wrapper">
-              <a class="download-button" href="https://opensource.planetable.xyz/planet/release-0.6.1/Planet.zip">Download for Mac</a>
+              <a class="download-button" href="https://opensource.planetable.xyz/planet/release-0.6.15-3/Planet.zip">Download for Mac</a>
               <span class="latest-version">The latest version</span>
               <span class="release-date">Released on</span>
             </div>
